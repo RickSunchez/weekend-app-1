@@ -1,0 +1,246 @@
+#IDE {
+    width: 600px;
+    height: 400px;
+    background-color: #c0c0c0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-top: solid 2px white;
+    border-left: solid 2px white;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
+
+    box-sizing: border-box;
+    padding: 2px;
+
+    font-family: "Courier New", Courier, monospace;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#IDE .header {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 22px;
+
+    background: rgb(0,0,130);
+    background: linear-gradient(90deg, rgba(0,0,130,1) 0%, rgba(26,132,211,1) 100%); 
+}
+
+#IDE .header .icon {
+    background-image: url(../icons/notepad.png);
+    background-size: 100%;
+    width: 18px;
+    height: 18px;
+    margin: 2px 4px 2px 4px;
+}
+
+#IDE .header .title {
+    color: white;
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    margin: 2px 4px 2px 4px;
+    flex: 1;
+    font-weight: bold;
+}
+
+#IDE .header .controls {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    margin: 0px 4px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#IDE .header .controls .square {
+    width: 18px;
+    height: 18px;
+    margin: 0px 1px;
+
+    background-color: #c0c0c0;
+
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+
+    box-sizing: border-box;
+    position: relative;
+}
+
+#IDE .header .controls .square:active {
+    border-top: solid 1px black;
+    border-left: solid 1px black;
+    border-bottom: solid 1px white;
+    border-right: solid 1px white;
+}
+
+#IDE .header .controls .square:active:before,
+#IDE .header .controls .square:active:after {
+    transform: translate(1px, 1px);
+}
+
+#IDE .header .controls .square.hide:before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: 12px;
+    height: 2px;
+    background-color: black;
+}
+
+#IDE .header .controls .square.full:before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 2px;
+    left: 2px;
+    box-sizing: border-box;
+
+    border: solid 1px black;
+    border-top: solid 3px black;
+}
+
+#IDE .header .controls .square.exit:before,
+#IDE .header .controls .square.exit:after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+
+    background-color: black;
+}
+
+#IDE .header .controls .square.exit:before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#IDE .header .controls .square.exit:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#IDE .header .controls .square.exit:active:before {
+    transform: translate(calc(-50% + 1px), calc(-50% + 1px)) rotate(45deg);
+}
+
+#IDE .header .controls .square.exit:active:after {
+    transform: translate(calc(-50% + 1px), calc(-50% + 1px)) rotate(-45deg);
+}
+
+/* Menu level 1 */
+#IDE .toolbar ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#IDE .toolbar ul li {
+    margin: 1px 3px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    border: solid 1px #c0c0c0;
+    padding: 2px;
+}
+
+#IDE .toolbar ul li:hover {
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+}
+
+#IDE .toolbar ul li:active,
+#IDE .toolbar ul.active li.lvl1-li.active,
+#IDE .toolbar ul.active li.lvl1-li:hover {
+    border-top: solid 1px black;
+    border-left: solid 1px black;
+    border-bottom: solid 1px white;
+    border-right: solid 1px white;
+
+    padding: 3px 1px 1px 3px;
+}
+
+#IDE .toolbar ul li:first-letter {
+    text-decoration: underline;
+}
+
+/* Menu level 2 */
+
+#IDE .toolbar ul li {
+    position: relative;
+}
+
+#IDE .toolbar ul li ul.level2 {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+
+    top: 22px;
+    left: -1px;
+
+    background-color: #c0c0c0;
+
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+}
+
+#IDE .toolbar ul.active li:hover ul.level2,
+#IDE .toolbar ul.active li.active ul.level2 {
+    display: flex;
+}
+
+#IDE .toolbar ul li ul.level2 li {
+    border: none;
+    margin: 0px;
+    padding: 0px 20px;
+    white-space: nowrap;
+}
+
+#IDE .toolbar ul li ul.level2 li:hover {
+    background-color: rgba(0,0,130,1);
+    color: white;
+}
+
+#IDE .toolbar ul li ul.level2 hr {
+    width: 85%;
+    border-top: solid 1px black;
+    border-bottom: solid 1px white;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#IDE .editor {
+    background-color: white;
+    flex: 1;
+    border: solid 1px #474747;
+    box-sizing: border-box;
+    padding: 2px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+
+    scrollbar-width: 15px;
+}
+
+#IDE .editor:focus-visible {
+    outline: none;
+    box-shadow: none;
+}

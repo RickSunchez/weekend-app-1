@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "HardPixel";
+    src: url(../fonts/Hardpixel-nn51.otf);
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: HardPixel;
+}
+#app {
+    background-image: url(../images/bg.png);
+    background-position: center;
+    background-size: 100%;
+    position: relative;
+    width: 800px;
+    height: 600px;
+}
+
+#app canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#scene {
+    width: 100%;
+    height: 100%;
+}
+
+#scene #dialog {
+    width: 550px;
+    height: 92px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 7px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 2px #2D5400;
+    background: rgb(181,243,109);
+    background: linear-gradient(135deg, rgba(181,243,109,1) 0%, rgba(181,243,109,1) 10%, rgba(201,249,146,1) 10%, rgba(201,249,146,1) 11%, rgba(181,243,109,1) 11%, rgba(181,243,109,1) 14%, rgba(201,249,146,1) 14%, rgba(201,249,146,1) 22%, rgba(181,243,109,1) 22%, rgba(181,243,109,1) 94%, rgba(201,249,146,1) 94%, rgba(201,249,146,1) 95%, rgba(181,243,109,1) 95%, rgba(181,243,109,1) 100%); 
+}
+
+#scene #dialog.top {
+    top: 35px;
+}
+
+#scene #dialog.bottom {
+    bottom: 25px;
+}

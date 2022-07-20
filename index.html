@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="./styles/nodes.css">
+<link rel="stylesheet" href="./styles/pixelButton.css">
+<link rel="stylesheet" href="./styles/sub.css">
+<link rel="stylesheet" href="./styles/scenes.css">
+<link rel="stylesheet" href="./styles/IDE.css">
+
+<script src="./scripts/sources.js"></script>
+<script src="./scripts/scripts.js"></script>
+<script src="./scripts/buttons.js"></script>
+<script src="./scripts/scenes.js"></script>
+<script src="./scripts/dialog.js"></script>
+<script src="./scripts/styled.js"></script>
+<script src="./scripts/IDEgameplay.js"></script>
+<script src="./scripts/hack1.js"></script>
+<script src="./scripts/PuzzleGameplay.js"></script>
+
+<body>
+    <div id="app">
+        <canvas></canvas>
+        <div id="scene" scene="load">
+        </div>
+    </div>
+
+    <template scene="load">
+        Loading...
+    </template>
+
+    <template scene="start" activate="start">
+        <div class="pixelButton relativeCenter" action="start">
+            <div class="pb-top">
+                Let's Hack!
+            </div>
+            <div class="pb-side"></div>  
+        </div>
+    </template>
+
+    <template scene="dialog" activate="runDialog">
+        <div id="dialog"></div>
+    </template>
+
+    <template scene="hack-1" activate="hack1">
+        <component name="IDE" activate="IDE" options="Easy-win-app.html"></component>
+    </template>
+
+    <template scene="hack-2" activate="hack2"></template>
+    <template scene="hack-3" activate="hack3"></template>
+
+    <template component="IDE">
+        <div id="IDE" activate="IDE" title="Easy-win-app.html">
+            <div class="header">
+                <div class="icon"></div>
+                <div class="title">Easy-win-app.html</div>
+                <div class="controls">
+                    <div class="square hide"></div>
+                    <div class="square full"></div>
+                    <div class="square exit"></div>
+                </div>
+            </div>
+            <div class="toolbar">
+                <ul class="level1">
+                    <li class="lvl1-li">File
+                        <ul class="level2">
+                            <li>New</li>
+                            <li>Open...</li>
+                            <li>Save</li>
+                            <li>Save as...</li>
+                            <hr>
+                            <li>Page Setup</li>
+                            <li>Print</li>
+                            <hr>
+                            <li>Exit</li>
+                        </ul>
+                    </li>
+                    <li class="lvl1-li">Edit
+                        <ul class="level2">
+                            <li>Undo</li>
+                            <li>Repeat</li>
+                            <hr>
+                            <li>Cut</li>
+                            <li>Copy</li>
+                            <li>Paste</li>
+                            <li>Delete</li>
+                            <hr>
+                            <li>Select All</li>
+                            <li>Time/Date</li>
+                            <hr>
+                            <li>Word Wrap</li>
+                            <li>Set Font...</li>
+                        </ul>
+                    </li>
+                    <li class="lvl1-li">Search
+                        <ul class="level2">
+                            <li>Find...</li>
+                            <li>Find Next</li>
+                        </ul>
+                    </li>
+                    <li class="lvl1-li">Help
+                        <ul class="level2">
+                            <li>Help Topics</li>
+                            <hr>
+                            <li>About Notepad</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="editor" contenteditable="true"></div>
+        </div>
+    </template>
+</body>
+
+<script>
+    // GLOBALS
+    window.imageList = [];
+    window.ctx = undefined;
+    window.canvas = undefined;
+
+    window.addEventListener("load", (ev)=>{
+        switchScene("load");
+
+        canvas = document.querySelector("#app canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+
+        ctx = canvas.getContext("2d");
+
+        Promise.all(IMAGES.map(img => {return loadImage(img);}))
+            .then(values => { 
+                imageList = values.map(img => {
+                    let scale = parseFloat(img.getAttribute("scale"));
+                    return {
+                        node: img,
+                        tag: img.getAttribute("tag"),
+                        width: img.width * scale,
+                        height: img.height * scale
+                    }
+                })
+
+                switchScene("start");
+                // switchScene("hack-2");
+            })
+    })
+</script>
